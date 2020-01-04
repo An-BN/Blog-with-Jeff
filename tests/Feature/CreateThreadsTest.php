@@ -19,7 +19,7 @@ class CreateThreadsTest extends TestCase
         $this->get('/threads/create')
             ->assertRedirect('/login');
 
-        $this->post('/threads', [])
+        $this->post('/threads')
             ->assertRedirect('/login');
 
 //        $thread = factory('App\Thread')->make();
@@ -32,7 +32,7 @@ class CreateThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $thread = factory('App\Thread')->make();
+        $thread = factory('App\Thread')->create();
 
         $this->post('/threads', $thread->toArray());
 

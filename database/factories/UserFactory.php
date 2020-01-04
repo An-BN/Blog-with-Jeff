@@ -29,10 +29,21 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->define(App\Thread::class, function ($faker) {
     return [
         'user_id' => factory(App\User::class),
+        'channel_id' => factory(App\Channel::class),
         'title' => $faker->sentence,
         'body'  => $faker->paragraph
     ];
 });
+
+$factory->define(App\Channel::class, function ($faker) {
+    $name = $faker->word;
+
+    return [
+        'name' => $name,
+        'slug' => $name
+    ];
+});
+
 
 
 $factory->define(App\Reply::class, function ($faker) {
