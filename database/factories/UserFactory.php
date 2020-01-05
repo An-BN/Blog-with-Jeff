@@ -42,6 +42,7 @@ $factory->define(App\Channel::class, function ($faker) {
         'name' => $name,
         'slug' => $name
     ];
+
 });
 
 
