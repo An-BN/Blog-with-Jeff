@@ -9,16 +9,14 @@
 
                     <div class="card-body">
                         @foreach ($threads as $thread)
-                            <article>
-                                <h4>
+                            <article class="card mt-4">
+                                <h4 class="card-header">
                                     <a href="{{ $thread->path() }}">
                                         {{ $thread->title }}
                                     </a>
                                 </h4>
-                                <div>{{ $thread->body }}</div>
+                                <div class="card-body">{{ $thread->body }}</div>
                             </article>
-
-                            <hr>
                         @endforeach
                     </div>
                 </div>

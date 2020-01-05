@@ -23,6 +23,11 @@ class Thread extends Model
         return "/threads/{$this->channel->slug}/{$this->id}";
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * A thread belongs to a creator.
      *
