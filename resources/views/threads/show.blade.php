@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-8 col-md-offset-2 mb-4">
+        <div class="row">
+            <div class="col-8">
                 <div class="card">
                     <div class="card-header">
                         <a href="#">{{ $thread->creator->name }}</a> posted:
@@ -13,20 +13,14 @@
                         {{ $thread->body }}
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-8 col-md-offset-2">
-                @foreach ($thread->replies as $reply)
-                    @include ('threads.reply')
-                @endforeach
-            </div>
-        </div>
+                <div>
+                    @foreach ($thread->replies as $reply)
+                        @include ('threads.reply')
+                    @endforeach
+                </div>
 
-        @if (auth()->check())
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-8 col-md-offset-2">
+                @if (auth()->check())
                     <form method="POST" action="{{ $thread->path() . '/replies' }}">
                         {{ csrf_field() }}
 
@@ -36,10 +30,23 @@
 
                         <button type="submit" class="btn btn-primary">Post</button>
                     </form>
+                @else
+                    <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this
+                        discussion.</p>
+                @endif
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            This thread was published {{ $thread->created_at->diffForHumans() }} by
+                            <a href="#">{{ $thread->creator->name }}</a>, and currently
+                            has {{ $thread->replies_count }} {{ Str::plural('comment', $thread->replies_count) }}.
+                        </p>
+                    </div>
                 </div>
             </div>
-        @else
-            <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.</p>
-        @endif
+        </div>
     </div>
 @endsection
