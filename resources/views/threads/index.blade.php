@@ -10,7 +10,7 @@
                     <div class="card-body">
                         @foreach ($threads as $thread)
                             <article class="card mt-4">
-                                <div class="level">
+                                <div class="level card-header">
                                     <h4 class="flex">
                                         <a href="{{ $thread->path() }}">
                                             {{ $thread->title }}
@@ -20,7 +20,7 @@
                                     {{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}
                                     </a>
                                 </div>
-                                <div class="body">{{ $thread->body }}</div>
+                                <div class="card-body">{{ $thread->body }}</div>
                             </article>
                         @endforeach
                     </div>
