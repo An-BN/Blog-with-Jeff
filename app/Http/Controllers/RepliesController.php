@@ -52,7 +52,7 @@ class RepliesController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return back();
+        return back()->with('flash', 'Your reply has been left.');
     }
 
     /**
@@ -90,13 +90,17 @@ class RepliesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the given reply.
      *
-     * @param  \App\Reply  $reply
-     * @return \Illuminate\Http\Response
+     * @param  Reply $reply
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Reply $reply)
     {
-        //
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        return back();
     }
 }

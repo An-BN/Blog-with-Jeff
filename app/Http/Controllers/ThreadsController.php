@@ -60,9 +60,10 @@ class ThreadsController extends Controller
             'channel_id' => 'required|exists:channels,id'
         ]);
 
-        auth()->user()->threads()->create($attributes);
+        $thread = auth()->user()->threads()->create($attributes);
 
-        return redirect('/threads');
+        return redirect($thread->path())
+            ->with('flash', 'Your thread has been published!');
     }
 
     /**
