@@ -20,6 +20,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('flash', require('./components/Flash.vue'));
+Vue.component('reply', require('./components/Reply.vue'));
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,7 +31,7 @@ Vue.component('flash', require('./components/Flash.vue'));
 
 window.events = new Vue();
 
-window.flash = function (message) {
+window.flash = function( message ) {
     window.events.$emit('flash', message);
 };
 

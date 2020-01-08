@@ -78,15 +78,17 @@ class RepliesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update an existing reply.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reply  $reply
-     * @return \Illuminate\Http\Response
+     * @param Reply $reply
      */
-    public function update(Request $request, Reply $reply)
+    public function update(Reply $reply)
     {
-        //
+        $this->authorize('update', $reply);
+
+        $this->validate(request(), ['body' => 'required']);
+
+        $reply->update(request(['body']));
     }
 
     /**
